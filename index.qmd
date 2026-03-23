@@ -1,0 +1,257 @@
+---
+title: Instalando e executando DrugCLIP no Escola de Sagres
+author: "Fernando Náufel"
+date: now
+date-format: "DD/MM/YYYY HH:mm"
+lang: pt
+engine: knitr
+execute: 
+  echo: true
+  eval: false
+  warning: true
+  error: true
+  include: true
+
+# bibliography: bibliography.bib
+
+# Português:
+# csl: universidade-do-porto-faculdade-de-engenharia-chicago-pt-crono.csl
+
+format:
+  html:
+    toc: true  
+    toc-depth: 3
+    number-sections: true
+    number-depth: 4
+    theme: 
+      - journal
+      - _custom.scss
+#    link-external-icon: true
+    link-external-newwindow: true
+    link-external-filter: ^(?:http:|https:)\/\/fnaufel\.github\.io
+    df-print: paged
+    code-link: true
+    code-copy: true
+    code-tools: true
+    self-contained: true
+---
+
+# Sobre este documento
+
+???
+
+
+# Objetivos
+
+???
+
+
+# Instalação
+
+## Preparação
+
+Vamos supor que já estamos no diretório onde queremos instalar o DrugCLIP.
+
+Carregamos o módulo Python no Sagres:
+
+```{bash}
+module load python
+python --version
+```
+
+A versão do Python será mostrada:
+
+```
+Python 3.12.1
+```
+
+Iniciamos um projeto com `uv`:
+
+```{bash}
+uv init
+```
+
+
+## Dependências
+
+O [README](https://github.com/fnaufel/DrugCLIP/blob/main/README.md) do repositório do DrugCLIP diz que as dependências são as mesmas do Uni-mol.
+
+O [repositório do Uni-mol](https://github.com/deepmodeling/Uni-Mol/tree/main/unimol) lista como dependências:
+
+- [Uni-Core](https://github.com/dptech-corp/Uni-Core) (*framework* distribuído para PyTorch),
+- Rdkit versão 2022.9.5.
+
+Aparentemente, o DrugCLIP traz sua própria cópia do Uni-mol. Não é necessário instalar o Uni-Mol separadamente.
+
+
+### Instalação do PyTorch
+
+Verificamos a versão do CUDA em um nó de GPU:
+
+```{bash}
+srun --partition=gpu --gres=gpu:1 --time=00:05:00 --pty bash
+nvcc --version
+```
+
+A saída é
+
+```
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2024 NVIDIA Corporation
+Built on Tue_Feb_27_16:19:38_PST_2024
+Cuda compilation tools, release 12.4, V12.4.99
+Build cuda_12.4.r12.4/compiler.33961263_0
+```
+
+No mesmo nó, rodamos, para mais detalhes
+
+```{bash}
+nvidia-smi
+```
+
+A saída é
+
+```
+Mon Mar 23 15:16:38 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.54.14              Driver Version: 550.54.14      CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A2                      On  |   00000000:41:00.0 Off |                    0 |
+|  0%   34C    P8              8W /   60W |       0MiB /  15356MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+```
+
+Seguindo as instruções em <https://pytorch.org/get-started/locally/#linux-installation>, instalamos Pytorch com suporte a CUDA 12.4:
+
+```{bash}
+uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+```
+
+Foram instalados:
+
+```
+Installed 17 packages in 23.74s
+ + nvidia-cublas-cu12==12.4.5.8
+ + nvidia-cuda-cupti-cu12==12.4.127
+ + nvidia-cuda-nvrtc-cu12==12.4.127
+ + nvidia-cuda-runtime-cu12==12.4.127
+ + nvidia-cudnn-cu12==9.1.0.70
+ + nvidia-cufft-cu12==11.2.1.3
+ + nvidia-curand-cu12==10.3.5.147
+ + nvidia-cusolver-cu12==11.6.1.9
+ + nvidia-cusparse-cu12==12.3.1.170
+ + nvidia-cusparselt-cu12==0.6.2
+ + nvidia-nccl-cu12==2.21.5
+ + nvidia-nvjitlink-cu12==12.4.127
+ + nvidia-nvtx-cu12==12.4.127
+ - sympy==1.14.0
+ + sympy==1.13.1
+ + torch==2.6.0+cu124
+ + torchvision==0.21.0+cu124
+ - triton==3.3.1
+ + triton==3.2.0
+```
+
+Vamos verificar se Pytorch está funcionando com CUDA. 
+
+Vamos criar o seguinte *script* Python (`test-cuda.py`):
+
+```{python}
+#! /usr/bin/env python
+
+# test-cuda.py
+
+import torch
+x = torch.rand(5, 3)
+print(x)
+print(torch.cuda.is_available())
+```
+
+Tornamos o arquivo executável:
+
+```{bash}
+chmod u+x test-cuda.py
+```
+
+Vamos para um *shell* em um nó de GPU e rodamos o *script*:
+
+```{bash}
+srun --partition=gpu --gres=gpu:1 --time=00:05:00 --pty bash
+```
+
+```{bash}
+./test-cuda.py
+```
+
+A saída é
+
+```
+tensor([[0.0402, 0.9004, 0.3924],
+        [0.3431, 0.7949, 0.1963],
+        [0.2271, 0.4274, 0.3732],
+        [0.7820, 0.6016, 0.5274],
+        [0.5152, 0.3339, 0.1266]])
+True
+```
+
+[Tudo certo com a instalação de Pytorch versão 2.6.0+cu124.]{.hl}
+
+
+### Instalação do Uni-Mol
+
+Temos 3 opções:
+
+1. Instalar um *wheel* pré-compilado,
+1. Compilar o fonte,
+1. Instalar uma imagem do Docker.
+
+
+#### Instalar um *wheel* pré-compilado
+
+No *site* do Uni-Mol, estão disponíveis os seguintes *wheels*:
+
+- unicore-0.0.1+cu117torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
+- unicore-0.0.1+cu117torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
+- unicore-0.0.1+cu117torch2.0.0-cp39-cp39-linux\_x86\_64.whl,
+- unicore-0.0.1+cu118torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
+- unicore-0.0.1+cu118torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
+- unicore-0.0.1+cu118torch2.0.0-cp39-cp39-linux\_x86\_64.whl.
+
+O número depois de `cu` é a versão do CUDA, e o número depois de `cp` é a versão do Python.
+
+::: {.callout-caution title="Versões diferentes"}
+
+Estamos com CUDA 12.4, Pytorch 2.6.0 e Python 3.12.1.
+
+Vamos tentar instalar o *wheel* feito para CUDA 11.8, Pytorch 2.0.0 e Python 3.10.
+
+:::
+
+```{bash}
+curl https://github.com/dptech-corp/Uni-Core/releases/download/0.0.3/unicore-0.0.1+cu118torch2.0.0-cp310-cp310-linux_x86_64.whl
+uv add ./unicore-0.0.1+cu118torch2.0.0-cp310-cp310-linux_x86_64.whl
+```
+
+Agora vamos testar a instalação:
+
+???
+
+
+## Dados
+
+???
+
