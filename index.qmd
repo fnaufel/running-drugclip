@@ -46,9 +46,9 @@ format:
 ???
 
 
-# Instalação
+# Instalar
 
-## Preparação
+## Preparar o ambiente
 
 Vamos supor que já estamos no diretório onde queremos instalar o DrugCLIP.
 
@@ -72,7 +72,7 @@ uv init
 ```
 
 
-## Dependências
+## Instalar dependências
 
 O [README](https://github.com/fnaufel/DrugCLIP/blob/main/README.md) do repositório do DrugCLIP diz que as dependências são as mesmas do Uni-mol.
 
@@ -84,7 +84,7 @@ O [repositório do Uni-mol](https://github.com/deepmodeling/Uni-Mol/tree/main/un
 Aparentemente, o DrugCLIP traz sua própria cópia do Uni-mol. Não é necessário instalar o Uni-Mol separadamente.
 
 
-### Instalação do PyTorch
+### Instalar PyTorch
 
 Verificamos a versão do CUDA em um nó de GPU:
 
@@ -211,7 +211,7 @@ True
 [Tudo certo com a instalação de Pytorch versão 2.6.0+cu124.]{.hl}
 
 
-### Instalação do Uni-Mol
+### Instalar o Uni-core
 
 Temos 3 opções:
 
@@ -220,9 +220,9 @@ Temos 3 opções:
 1. Instalar uma imagem do Docker.
 
 
-#### Instalar um *wheel* pré-compilado
+#### Instalar um *wheel* pré-compilado (falhou)
 
-No *site* do Uni-Mol, estão disponíveis os seguintes *wheels*:
+[No repositório do Uni-core](https://github.com/dptech-corp/Uni-Core), estão disponíveis os seguintes *wheels*:
 
 - unicore-0.0.1+cu117torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
 - unicore-0.0.1+cu117torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
@@ -237,16 +237,25 @@ O número depois de `cu` é a versão do CUDA, e o número depois de `cp` é a v
 
 Estamos com CUDA 12.4, Pytorch 2.6.0 e Python 3.12.1.
 
-Vamos tentar instalar o *wheel* feito para CUDA 11.8, Pytorch 2.0.0 e Python 3.10.
+Nenhum destes *wheels* serve para o nosso ambiente.
+
+Vamos compilar o Uni-core a partir do fonte.
 
 :::
 
-```{bash}
-curl https://github.com/dptech-corp/Uni-Core/releases/download/0.0.3/unicore-0.0.1+cu118torch2.0.0-cp310-cp310-linux_x86_64.whl
-uv add ./unicore-0.0.1+cu118torch2.0.0-cp310-cp310-linux_x86_64.whl
-```
+
+#### Compilar a partir do fonte
+
+???
+
+
+### Testar instalação do Uni-core
 
 Agora vamos testar a instalação:
+
+???
+
+wikitext não estava disponível no url dado. Baixei de https://www.kaggle.com/datasets/bestwater/wikitext-2-v1?resource=download
 
 ???
 
