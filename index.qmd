@@ -211,51 +211,13 @@ Preferred version:
 (...)
 ```
 
-Instalando:
+Para instalar o Pytorch com suporte a CUDA, precisamos especificar algumas informações sobre a GPU. Usando a saída do comando `nvidia-smi`, verificamos que a versão do CUDA é 12.4. Pesquisando o modelo da GPU, descobrimos que o valor correto de `cuda_arch` é 86:
 
 ```{bash}
-spack install py-torch
+spack install py-torch +cuda cuda_arch=86 ^cuda@12.4
 ```
 
-São 109 dependências! O processo de instalação demora muito. Aparentemente, o `spack` compila a maioria dos pacotes a partir dos fontes. Por exemplo, o `openblas` precisou de mais de 6 minutos para compilar:
-
-```
-Spack: Processing openblas [18/109]
-Spack: Acquiring lock for openblas [18/109]
-==> Waiting for openblas-0.3.28-plhve5gqcph62olxerlfm7ydpdv5btsd
-Spack: Preparing openblas [18/109]Spack: Installing openblas [18/109]
-==> Installing openblas-0.3.28-plhve5gqcph62olxerlfm7ydpdv5btsd [18/109]
-==> No binary for openblas-0.3.28-plhve5gqcph62olxerlfm7ydpdv5btsd found: installing from source
-==> Fetching https://mirror.spack.io/_source-cache/archive/f1/f1003466ad074e9b0c8d421a204121100b0751c96fc6fcf3d1456bd12f8a00a1.tar.gz
-==> Applied patch /opt/software/spack/var/spack/repos/builtin/packages/openblas/openblas-0.3.28-thread-buffer.patch
-==> openblas: Executing phase: 'edit'
-==> openblas: Executing phase: 'build'
-==> openblas: Executing phase: 'install'
-==> openblas: Successfully installed openblas-0.3.28-plhve5gqcph62olxerlfm7ydpdv5btsd
-  Stage: 3.85s.  
-  Edit: 0.00s.  
-  Build: 6m 14.62s.  
-  Install: 1.94s.  
-  Post-install: 0.15s.  
-  Total: 6m 20.67s
-[+] /home/fernando.amaral/spack/linux-rocky8-zen/gcc-8.5.0/openblas-0.3.28-plhve5gqcph62olxerlfm7ydpdv5btsd
-```
-
-Depois das dependências, a instalação do próprio Pytorch demorou mais de uma hora e meia!
-
-```
-==> No binary for py-torch-2.1.2-7qgbllaee57m5hgrrdckq5bylsnynfvq found: installing from source
-==> Fetching https://mirror.spack.io/_source-cache/archive/23/23fb4009f7337051fc5303927ff977186a5af960245e7212895406477d8b2f66
-==> Applied patch https://patch-diff.githubusercontent.com/raw/pytorch/pytorch/pull/110063.patch?full_index=1
-==> Ran patch() for py-torch
-==> py-torch: Executing phase: 'install'
-==> py-torch: Successfully installed py-torch-2.1.2-7qgbllaee57m5hgrrdckq5bylsnynfvq
-  Stage: 48m 0.93s.
-  Install: 50m 44.93s.
-  Post-install: 10.20s.
-  Total: 1h 38m 56.81s
-[+] /home/fernando.amaral/spack/linux-rocky8-zen/gcc-8.5.0/py-torch-2.1.2-7qgbllaee57m5hgrrdckq5bylsnynfvq
-```
+A instalação é demorada.
 
 Vamos instalar `py-torchvision` também:
 
@@ -277,10 +239,19 @@ Vamos criar o seguinte *script* Python (`test-cuda.py`):
 
 # test-cuda.py
 
+import os
 import torch
+
 x = torch.rand(5, 3)
 print(x)
-print(torch.cuda.is_available())
+print("torch.__version__            =", torch.__version__)
+print("torch.version.cuda           =", torch.version.cuda)
+print("torch.backends.cuda.is_built =", torch.backends.cuda.is_built())
+print("torch.cuda.is_available      =", torch.cuda.is_available())
+print("torch.cuda.device_count      =", torch.cuda.device_count())
+
+if torch.cuda.is_available():
+    print("device 0 name               =", torch.cuda.get_device_name(0))
 ```
 
 Tornamos o arquivo executável:
@@ -296,21 +267,27 @@ srun --partition=gpu --gres=gpu:1 --time=00:05:00 --pty bash
 ```
 
 ```{bash}
+module load python
+spack load py-torch
+spack load py-torchvision
 ./test-cuda.py
 ```
+
+::: {.callout-note title="Carregando módulos e pacotes"}
+
+Os comandos `module load ...` e `spack load ...` acima precisam ser executados para ativar módulos e pacotes. 
+
+Para que os módulos e pacotes desejados sejam sempre carregados quando fizermos *login*, podemos incluir os comandos no arquivo `~/.bash_profile`.
+
+:::
 
 A saída é
 
 ```
-tensor([[0.0402, 0.9004, 0.3924],
-        [0.3431, 0.7949, 0.1963],
-        [0.2271, 0.4274, 0.3732],
-        [0.7820, 0.6016, 0.5274],
-        [0.5152, 0.3339, 0.1266]])
-True
+???
 ```
 
-[Tudo certo com a instalação de Pytorch versão 2.6.0+cu124.]{.hl}
+
 
 
 ### Instalar o Uni-core
