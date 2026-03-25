@@ -1,0 +1,164 @@
+### Instalar o Uni-core
+
+Temos 3 opções:
+
+1. Instalar um *wheel* pré-compilado,
+1. Compilar o fonte,
+1. Instalar uma imagem do Docker.
+
+
+#### Instalar um *wheel* pré-compilado (falhou)
+
+[No repositório do Uni-core](https://github.com/dptech-corp/Uni-Core), estão disponíveis os seguintes *wheels*:
+
+- unicore-0.0.1+cu117torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
+- unicore-0.0.1+cu117torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
+- unicore-0.0.1+cu117torch2.0.0-cp39-cp39-linux\_x86\_64.whl,
+- unicore-0.0.1+cu118torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
+- unicore-0.0.1+cu118torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
+- unicore-0.0.1+cu118torch2.0.0-cp39-cp39-linux\_x86\_64.whl.
+
+O número depois de `cu` é a versão do CUDA, e o número depois de `cp` é a versão do Python.
+
+::: {.callout-caution title="Versões diferentes"}
+
+Estamos com CUDA 12.4, Pytorch 2.6.0 e Python 3.12.1.
+
+Nenhum destes *wheels* serve para o nosso ambiente.
+
+Vamos compilar o Uni-core a partir do fonte.
+
+:::
+
+
+#### Compilar a partir do fonte
+
+???
+
+
+### Testar instalação do Uni-core
+
+Agora vamos testar a instalação:
+
+???
+
+wikitext não estava disponível no url dado. Baixei de https://www.kaggle.com/datasets/bestwater/wikitext-2-v1?resource=download
+
+???
+
+
+## Criar diretório e ambiente virtual
+
+Criamos um diretório e mudamos para ele:
+
+```{bash}
+mkdir -p ~/BioSensIA/DrugCLIP-original-experiments/
+cd ~/BioSensIA/DrugCLIP-original-experiments/
+```
+
+Criamos um ambiente virtual:
+
+```{bash}
+spack env create --with-view view --dir .
+```
+
+Vamos descobrir a versão do Python que foi usada para instalar o Pytorch:
+
+```{bash}
+spack find --long py-torch
+```
+
+A saída foi
+
+```
+-- linux-rocky8-zen / gcc@8.5.0 ---------------------------------
+7qgblla py-torch@2.1.2
+==> 1 installed package
+```
+
+Os dígitos `7qgblla` são o *hash* da especificação da instalação do Pytorch. 
+
+Para ver os detalhes da especificação:
+
+```{bash}
+spack spec /7qgblla
+```
+
+A saída contém, entre outras, a seguinte linha:
+
+```
+[+]      ^python@3.11.9%gcc@8.5.0+bz2+crypt+ctypes+dbm~debug+libxml2+lzma~nis~optimizations+pic+pyexpat+pythoncmd+readline+shared+sqlite3+ssl~tkinter+uuid+zlib build_system=generic patches=13fa8bf,b0615b2,ebdca64,f2fd060 arch=linux-rocky8-zen
+```
+
+A versão de Python foi a 3.11.9. 
+
+Vamos adicionar ao ambiente os pacotes necessários:
+
+```{bash}
+spack -e . add python@3.11.9 py-torch py-torchvision
+```
+
+Isto criou um arquivo `spack.yaml` no diretório atual, com o conteúdo:
+
+```{yaml}
+# This is a Spack Environment file.
+#
+# It describes a set of packages to be installed, along with
+# configuration settings.
+spack:
+  # add package specs to the `specs` list
+  specs:
+  - python@3.11.9
+  - py-torch
+  - py-torchvision
+  view: /home/fernando.amaral/BioSensIA/DrugCLIP-original-experiments/view
+  concretizer:
+    unify: true
+```
+
+Edite o arquivo, trocando a última linha para `unify: when_possible`. Isto permite que versões diferentes de um mesmo pacote sejam instaladas, caso uma única versão não satisfaça a especificação.
+
+Agora, precisamos **concretizar** o ambiente virtual:
+
+```{bash}
+spack -e . concretize -f
+```
+
+A opção `-f` faz com que a concretização comece "do zero", ignorando concretizações anteriores.
+
+Se tudo estiver certo, instale os pacotes no ambiente virtual:
+
+```{bash}
+spack -e . install
+```
+
+Por último, ative o ambiente virtual:
+
+```{bash}
+spack env activate -p .
+```
+
+A opção `-p` adiciona o nome do ambiente virtual ao início do *prompt* do *shell*, entre colchetes, como uma indicação visual de que o ambiente está ativo.
+
+::: {.callout-note title="Ativando e desativando o ambiente virtual"}
+
+Em um *login* posterior, quando quisermos usar este ambiente virtual, basta executar o último comando: `spack env activate -p .`
+
+Naturalmente, não é necessário adicionar, concretizar nem instalar nada novamente.
+
+Para desativar o ambiente virtual, digitamos
+
+```{bash}
+spack env deactivate
+```
+
+:::
+
+Leia mais sobre ambientes virtuais [na documentação do Spack](https://spack.readthedocs.io/en/latest/environments_basics.html).
+
+
+
+## Dados
+
+???
+

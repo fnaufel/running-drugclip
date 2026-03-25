@@ -69,22 +69,6 @@ Segundo o [Guia de Uso do Spack](https://docs.google.com/document/d/1UX1CC6DMGsy
    ```
 
 
-## Carregar o módulo Python
-
-Carregamos o módulo Python no Sagres:
-
-```{bash}
-module load python
-python --version
-```
-
-A versão do Python será mostrada:
-
-```
-Python 3.12.1
-```
-
-
 ## Instalar dependências
 
 O [README](https://github.com/fnaufel/DrugCLIP/blob/main/README.md) do repositório do DrugCLIP diz que as dependências são as mesmas do Uni-mol.
@@ -99,10 +83,17 @@ Aparentemente, o DrugCLIP traz sua própria cópia do Uni-mol. Não é necessár
 
 ### Verificar CUDA
 
-Verificamos a versão do CUDA em um nó de GPU:
+Precisamos saber a versão do CUDA para a instalação correta do Pytorch.  
+
+Vamos descobrir isto em um nó de GPU:
 
 ```{bash}
 srun --partition=gpu --gres=gpu:1 --time=00:05:00 --pty bash
+```
+
+Isto nos leva a um *shell* em um nó de GPU. Ali, digitamos
+
+```{bash}
 nvcc --version
 ```
 
@@ -211,10 +202,46 @@ Preferred version:
 (...)
 ```
 
+O `spack` vai compilar o fonte do Pytorch. Mas, para isto, precisamos instalar uma versão mais nova do `gcc`:
+
+```{bash}
+spack install gcc@13.3.0
+```
+
+Depois, precisamos carregar o pacote:
+
+```{bash}
+spack load gcc@13.3.0
+```
+
+Para confirmar a versão:
+
+```{bash}
+gcc --version
+```
+
+Precisamos agora registrar esta versão do `gcc` com o Spack:
+
+```{bash}
+spack compiler find
+```
+
+Vamos carregar, também, uma versão do Python:
+
+```{bash}
+module load python
+```
+
+Estamos usando a versão 3.12.1:
+
+```{bash}
+python --version
+```
+
 Para instalar o Pytorch com suporte a CUDA, precisamos especificar algumas informações sobre a GPU. Usando a saída do comando `nvidia-smi`, verificamos que a versão do CUDA é 12.4. Pesquisando o modelo da GPU, descobrimos que o valor correto de `cuda_arch` é 86:
 
 ```{bash}
-spack install py-torch +cuda cuda_arch=86 ^cuda@12.4
+spack install py-torch +cuda cuda_arch=86 %gcc@13 ^cuda@12.4
 ```
 
 A instalação é demorada.
@@ -224,8 +251,6 @@ Vamos instalar `py-torchvision` também:
 ```{bash}
 spack install py-torchvision
 ```
-
-???
 
 
 ### Verificar a instalação do Pytorch
@@ -273,73 +298,9 @@ spack load py-torchvision
 ./test-cuda.py
 ```
 
-::: {.callout-note title="Carregando módulos e pacotes"}
-
-Os comandos `module load ...` e `spack load ...` acima precisam ser executados para ativar módulos e pacotes. 
-
-Para que os módulos e pacotes desejados sejam sempre carregados quando fizermos *login*, podemos incluir os comandos no arquivo `~/.bash_profile`.
-
-:::
-
 A saída é
 
 ```
 ???
 ```
-
-
-
-
-### Instalar o Uni-core
-
-Temos 3 opções:
-
-1. Instalar um *wheel* pré-compilado,
-1. Compilar o fonte,
-1. Instalar uma imagem do Docker.
-
-
-#### Instalar um *wheel* pré-compilado (falhou)
-
-[No repositório do Uni-core](https://github.com/dptech-corp/Uni-Core), estão disponíveis os seguintes *wheels*:
-
-- unicore-0.0.1+cu117torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
-- unicore-0.0.1+cu117torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
-- unicore-0.0.1+cu117torch2.0.0-cp39-cp39-linux\_x86\_64.whl,
-- unicore-0.0.1+cu118torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
-- unicore-0.0.1+cu118torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
-- unicore-0.0.1+cu118torch2.0.0-cp39-cp39-linux\_x86\_64.whl.
-
-O número depois de `cu` é a versão do CUDA, e o número depois de `cp` é a versão do Python.
-
-::: {.callout-caution title="Versões diferentes"}
-
-Estamos com CUDA 12.4, Pytorch 2.6.0 e Python 3.12.1.
-
-Nenhum destes *wheels* serve para o nosso ambiente.
-
-Vamos compilar o Uni-core a partir do fonte.
-
-:::
-
-
-#### Compilar a partir do fonte
-
-???
-
-
-### Testar instalação do Uni-core
-
-Agora vamos testar a instalação:
-
-???
-
-wikitext não estava disponível no url dado. Baixei de https://www.kaggle.com/datasets/bestwater/wikitext-2-v1?resource=download
-
-???
-
-
-## Dados
-
-???
 
