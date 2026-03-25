@@ -229,10 +229,10 @@ spack compiler find
 Vamos carregar, também, uma versão do Python:
 
 ```{bash}
-module load python
+spack load python@3.11
 ```
 
-Estamos usando a versão 3.12.1:
+Para confirmar a versão:
 
 ```{bash}
 python --version
@@ -244,13 +244,7 @@ Para instalar o Pytorch com suporte a CUDA, precisamos especificar algumas infor
 spack install py-torch +cuda cuda_arch=86 %gcc@13 ^cuda@12.4
 ```
 
-A instalação é demorada.
-
-Vamos instalar `py-torchvision` também:
-
-```{bash}
-spack install py-torchvision
-```
+A instalação é demorada (quase 2 horas).
 
 
 ### Verificar a instalação do Pytorch
@@ -285,22 +279,72 @@ Tornamos o arquivo executável:
 chmod u+x test-cuda.py
 ```
 
-Vamos para um *shell* em um nó de GPU e rodamos o *script*:
+Vamos para um *shell* em um nó de GPU:
 
 ```{bash}
 srun --partition=gpu --gres=gpu:1 --time=00:05:00 --pty bash
 ```
 
+No nó de GPU, carregamos os pacotes necessários e rodamos o *script*:
+
 ```{bash}
-module load python
+spack load python@3.11
 spack load py-torch
-spack load py-torchvision
 ./test-cuda.py
 ```
 
 A saída é
 
 ```
-???
+tensor([[0.8326, 0.2251, 0.9847],
+        [0.4171, 0.1580, 0.4783],
+        [0.6500, 0.7902, 0.9062],
+        [0.9074, 0.7503, 0.4135],
+        [0.7938, 0.6857, 0.9237]])
+torch.__version__            = 2.5.1
+torch.version.cuda           = 12.4
+torch.backends.cuda.is_built = True
+torch.cuda.is_available      = True
+torch.cuda.device_count      = 1
+device 0 name               = NVIDIA A2
 ```
 
+[O Pytorch está instalado, com acesso à GPU.]{.hl}
+
+
+### Instalar o Uni-core
+
+Temos 3 opções:
+
+1. Instalar um *wheel* pré-compilado,
+1. Compilar o fonte,
+1. Instalar uma imagem do Docker.
+
+
+#### Instalar um *wheel* pré-compilado (falhou)
+
+[No repositório do Uni-core](https://github.com/dptech-corp/Uni-Core), estão disponíveis os seguintes *wheels*:
+
+- unicore-0.0.1+cu117torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
+- unicore-0.0.1+cu117torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
+- unicore-0.0.1+cu117torch2.0.0-cp39-cp39-linux\_x86\_64.whl,
+- unicore-0.0.1+cu118torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
+- unicore-0.0.1+cu118torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
+- unicore-0.0.1+cu118torch2.0.0-cp39-cp39-linux\_x86\_64.whl.
+
+O número depois de `cu` é a versão do CUDA, e o número depois de `cp` é a versão do Python.
+
+::: {.callout-caution title="Versões diferentes"}
+
+Estamos com CUDA 12.4, Pytorch 2.5.1 e Python 3.11.9.
+
+Nenhum destes *wheels* serve para o nosso ambiente.
+
+Vamos compilar o Uni-core a partir do fonte.
+
+:::
+
+
+#### Compilar a partir do fonte
+
+???

@@ -1,39 +1,3 @@
-### Instalar o Uni-core
-
-Temos 3 opções:
-
-1. Instalar um *wheel* pré-compilado,
-1. Compilar o fonte,
-1. Instalar uma imagem do Docker.
-
-
-#### Instalar um *wheel* pré-compilado (falhou)
-
-[No repositório do Uni-core](https://github.com/dptech-corp/Uni-Core), estão disponíveis os seguintes *wheels*:
-
-- unicore-0.0.1+cu117torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
-- unicore-0.0.1+cu117torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
-- unicore-0.0.1+cu117torch2.0.0-cp39-cp39-linux\_x86\_64.whl,
-- unicore-0.0.1+cu118torch2.0.0-cp310-cp310-linux\_x86\_64.whl,
-- unicore-0.0.1+cu118torch2.0.0-cp38-cp38-linux\_x86\_64.whl,
-- unicore-0.0.1+cu118torch2.0.0-cp39-cp39-linux\_x86\_64.whl.
-
-O número depois de `cu` é a versão do CUDA, e o número depois de `cp` é a versão do Python.
-
-::: {.callout-caution title="Versões diferentes"}
-
-Estamos com CUDA 12.4, Pytorch 2.6.0 e Python 3.12.1.
-
-Nenhum destes *wheels* serve para o nosso ambiente.
-
-Vamos compilar o Uni-core a partir do fonte.
-
-:::
-
-
-#### Compilar a partir do fonte
-
-???
 
 
 ### Testar instalação do Uni-core
@@ -95,28 +59,8 @@ A versão de Python foi a 3.11.9.
 Vamos adicionar ao ambiente os pacotes necessários:
 
 ```{bash}
-spack -e . add python@3.11.9 py-torch py-torchvision
+spack -e . add python@3.11.9 py-torch
 ```
-
-Isto criou um arquivo `spack.yaml` no diretório atual, com o conteúdo:
-
-```{yaml}
-# This is a Spack Environment file.
-#
-# It describes a set of packages to be installed, along with
-# configuration settings.
-spack:
-  # add package specs to the `specs` list
-  specs:
-  - python@3.11.9
-  - py-torch
-  - py-torchvision
-  view: /home/fernando.amaral/BioSensIA/DrugCLIP-original-experiments/view
-  concretizer:
-    unify: true
-```
-
-Edite o arquivo, trocando a última linha para `unify: when_possible`. Isto permite que versões diferentes de um mesmo pacote sejam instaladas, caso uma única versão não satisfaça a especificação.
 
 Agora, precisamos **concretizar** o ambiente virtual:
 
