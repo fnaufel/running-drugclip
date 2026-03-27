@@ -1,16 +1,4 @@
 
-
-### Testar instalação do Uni-core
-
-Agora vamos testar a instalação:
-
-???
-
-wikitext não estava disponível no url dado. Baixei de https://www.kaggle.com/datasets/bestwater/wikitext-2-v1?resource=download
-
-???
-
-
 ## Criar diretório e ambiente virtual
 
 Criamos um diretório e mudamos para ele:

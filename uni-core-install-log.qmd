@@ -1,0 +1,310 @@
+```
+No CUDA runtime is found, using CUDA_HOME='/home/fernando.amaral/spack/linux-rocky8-zen2/gcc-13.3.0/cuda-12.4.1-gbammvbl2hovlfyjscgq5yhrkwj3caq5'
+
+
+torch.__version__  = 2.5.1
+
+
+/home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/setuptools/__init__.py:92: _DeprecatedInstaller: setuptools.installer and fetch_build_eggs are deprecated.
+!!
+
+        ********************************************************************************
+        Requirements should be satisfied by a PEP 517 installer.
+        If you are using pip, you can try `pip install --use-pep517`.
+
+        This deprecation is overdue, please update your project and remove deprecated
+        calls to avoid build errors in the future.
+        ********************************************************************************
+
+!!
+  dist.fetch_build_eggs(dist.setup_requires)
+/home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/setuptools/dist.py:765: SetuptoolsDeprecationWarning: License classifiers are deprecated.
+!!
+
+        ********************************************************************************
+        Please consider removing the following classifiers in favor of a SPDX license expression:
+
+        License :: OSI Approved :: MIT License
+
+        See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.
+        ********************************************************************************
+
+!!
+  self._finalize_license_expression()
+running install
+/home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/setuptools/_distutils/cmd.py:90: SetuptoolsDeprecationWarning: setup.py install is deprecated.
+!!
+
+        ********************************************************************************
+        Please avoid running ``setup.py`` directly.
+        Instead, use pypa/build, pypa/installer or other
+        standards-based tools.
+
+        This deprecation is overdue, please update your project and remove deprecated
+        calls to avoid build errors in the future.
+
+        See https://blog.ganssle.io/articles/2021/10/setup-py-deprecated.html for details.
+        ********************************************************************************
+
+!!
+  self.initialize_options()
+running build
+running build_py
+copying unicore/__init__.py -> build/lib/unicore
+copying unicore/checkpoint_utils.py -> build/lib/unicore
+copying unicore/ema.py -> build/lib/unicore
+copying unicore/nan_detector.py -> build/lib/unicore
+copying unicore/options.py -> build/lib/unicore
+copying unicore/registry.py -> build/lib/unicore
+copying unicore/trainer.py -> build/lib/unicore
+copying unicore/utils.py -> build/lib/unicore
+copying unicore/version.py -> build/lib/unicore
+copying unicore_cli/__init__.py -> build/lib/unicore_cli
+copying unicore_cli/train.py -> build/lib/unicore_cli
+copying unicore/data/__init__.py -> build/lib/unicore/data
+copying unicore/data/append_token_dataset.py -> build/lib/unicore/data
+copying unicore/data/base_wrapper_dataset.py -> build/lib/unicore/data
+copying unicore/data/bert_tokenize_dataset.py -> build/lib/unicore/data
+copying unicore/data/data_utils.py -> build/lib/unicore/data
+copying unicore/data/dictionary.py -> build/lib/unicore/data
+copying unicore/data/from_numpy_dataset.py -> build/lib/unicore/data
+copying unicore/data/iterators.py -> build/lib/unicore/data
+copying unicore/data/lmdb_dataset.py -> build/lib/unicore/data
+copying unicore/data/lru_cache_dataset.py -> build/lib/unicore/data
+copying unicore/data/mask_tokens_dataset.py -> build/lib/unicore/data
+copying unicore/data/nested_dictionary_dataset.py -> build/lib/unicore/data
+copying unicore/data/num_samples_dataset.py -> build/lib/unicore/data
+copying unicore/data/numel_dataset.py -> build/lib/unicore/data
+copying unicore/data/pad_dataset.py -> build/lib/unicore/data
+copying unicore/data/prepend_token_dataset.py -> build/lib/unicore/data
+copying unicore/data/raw_dataset.py -> build/lib/unicore/data
+copying unicore/data/sort_dataset.py -> build/lib/unicore/data
+copying unicore/data/tokenize_dataset.py -> build/lib/unicore/data
+copying unicore/data/unicore_dataset.py -> build/lib/unicore/data
+copying unicore/distributed/__init__.py -> build/lib/unicore/distributed
+copying unicore/distributed/legacy_distributed_data_parallel.py -> build/lib/unicore/distributed
+copying unicore/distributed/module_proxy_wrapper.py -> build/lib/unicore/distributed
+copying unicore/distributed/utils.py -> build/lib/unicore/distributed
+copying unicore/logging/__init__.py -> build/lib/unicore/logging
+copying unicore/logging/meters.py -> build/lib/unicore/logging
+copying unicore/logging/metrics.py -> build/lib/unicore/logging
+copying unicore/logging/progress_bar.py -> build/lib/unicore/logging
+copying unicore/losses/__init__.py -> build/lib/unicore/losses
+copying unicore/losses/cross_entropy.py -> build/lib/unicore/losses
+copying unicore/losses/masked_lm.py -> build/lib/unicore/losses
+copying unicore/losses/unicore_loss.py -> build/lib/unicore/losses
+copying unicore/models/__init__.py -> build/lib/unicore/models
+copying unicore/models/distributed_unicore_model.py -> build/lib/unicore/models
+copying unicore/models/unicore_model.py -> build/lib/unicore/models
+copying unicore/modules/__init__.py -> build/lib/unicore/modules
+copying unicore/modules/layer_norm.py -> build/lib/unicore/modules
+copying unicore/modules/multihead_attention.py -> build/lib/unicore/modules
+copying unicore/modules/rms_norm.py -> build/lib/unicore/modules
+copying unicore/modules/softmax_dropout.py -> build/lib/unicore/modules
+copying unicore/modules/transformer_decoder.py -> build/lib/unicore/modules
+copying unicore/modules/transformer_decoder_layer.py -> build/lib/unicore/modules
+copying unicore/modules/transformer_encoder.py -> build/lib/unicore/modules
+copying unicore/modules/transformer_encoder_layer.py -> build/lib/unicore/modules
+copying unicore/optim/__init__.py -> build/lib/unicore/optim
+copying unicore/optim/adadelta.py -> build/lib/unicore/optim
+copying unicore/optim/adagrad.py -> build/lib/unicore/optim
+copying unicore/optim/adam.py -> build/lib/unicore/optim
+copying unicore/optim/dynamic_loss_scaler.py -> build/lib/unicore/optim
+copying unicore/optim/fp16_optimizer.py -> build/lib/unicore/optim
+copying unicore/optim/fused_adam.py -> build/lib/unicore/optim
+copying unicore/optim/sgd.py -> build/lib/unicore/optim
+copying unicore/optim/unicore_optimizer.py -> build/lib/unicore/optim
+copying unicore/tasks/__init__.py -> build/lib/unicore/tasks
+copying unicore/tasks/unicore_task.py -> build/lib/unicore/tasks
+copying unicore/optim/lr_scheduler/__init__.py -> build/lib/unicore/optim/lr_scheduler
+copying unicore/optim/lr_scheduler/cosine_lr_scheduler.py -> build/lib/unicore/optim/lr_scheduler
+copying unicore/optim/lr_scheduler/exponential_decay_schedule.py -> build/lib/unicore/optim/lr_scheduler
+copying unicore/optim/lr_scheduler/fixed_schedule.py -> build/lib/unicore/optim/lr_scheduler
+copying unicore/optim/lr_scheduler/inverse_square_root_schedule.py -> build/lib/unicore/optim/lr_scheduler
+copying unicore/optim/lr_scheduler/pass_through.py -> build/lib/unicore/optim/lr_scheduler
+copying unicore/optim/lr_scheduler/polynomial_decay_schedule.py -> build/lib/unicore/optim/lr_scheduler
+copying unicore/optim/lr_scheduler/reduce_lr_on_plateau.py -> build/lib/unicore/optim/lr_scheduler
+copying unicore/optim/lr_scheduler/tri_stage_lr_scheduler.py -> build/lib/unicore/optim/lr_scheduler
+copying unicore/optim/lr_scheduler/triangular_lr_scheduler.py -> build/lib/unicore/optim/lr_scheduler
+copying unicore/optim/lr_scheduler/unicore_lr_scheduler.py -> build/lib/unicore/optim/lr_scheduler
+running install_lib
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/append_token_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/base_wrapper_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/bert_tokenize_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/data_utils.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/dictionary.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/from_numpy_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/iterators.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/lmdb_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/lru_cache_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/mask_tokens_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/nested_dictionary_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/num_samples_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/numel_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/pad_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/prepend_token_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/raw_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/sort_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/tokenize_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+copying build/lib/unicore/data/unicore_dataset.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/distributed
+copying build/lib/unicore/distributed/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/distributed
+copying build/lib/unicore/distributed/legacy_distributed_data_parallel.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/distributed
+copying build/lib/unicore/distributed/module_proxy_wrapper.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/distributed
+copying build/lib/unicore/distributed/utils.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/distributed
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/logging
+copying build/lib/unicore/logging/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/logging
+copying build/lib/unicore/logging/meters.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/logging
+copying build/lib/unicore/logging/metrics.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/logging
+copying build/lib/unicore/logging/progress_bar.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/logging
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/losses
+copying build/lib/unicore/losses/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/losses
+copying build/lib/unicore/losses/cross_entropy.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/losses
+copying build/lib/unicore/losses/masked_lm.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/losses
+copying build/lib/unicore/losses/unicore_loss.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/losses
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/models
+copying build/lib/unicore/models/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/models
+copying build/lib/unicore/models/distributed_unicore_model.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/models
+copying build/lib/unicore/models/unicore_model.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/models
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules
+copying build/lib/unicore/modules/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules
+copying build/lib/unicore/modules/layer_norm.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules
+copying build/lib/unicore/modules/multihead_attention.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules
+copying build/lib/unicore/modules/rms_norm.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules
+copying build/lib/unicore/modules/softmax_dropout.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules
+copying build/lib/unicore/modules/transformer_decoder.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules
+copying build/lib/unicore/modules/transformer_decoder_layer.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules
+copying build/lib/unicore/modules/transformer_encoder.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules
+copying build/lib/unicore/modules/transformer_encoder_layer.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/cosine_lr_scheduler.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/exponential_decay_schedule.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/fixed_schedule.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/inverse_square_root_schedule.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/pass_through.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/polynomial_decay_schedule.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/reduce_lr_on_plateau.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/tri_stage_lr_scheduler.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/triangular_lr_scheduler.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/lr_scheduler/unicore_lr_scheduler.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler
+copying build/lib/unicore/optim/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim
+copying build/lib/unicore/optim/adadelta.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim
+copying build/lib/unicore/optim/adagrad.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim
+copying build/lib/unicore/optim/adam.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim
+copying build/lib/unicore/optim/dynamic_loss_scaler.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim
+copying build/lib/unicore/optim/fp16_optimizer.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim
+copying build/lib/unicore/optim/fused_adam.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim
+copying build/lib/unicore/optim/sgd.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim
+copying build/lib/unicore/optim/unicore_optimizer.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/tasks
+copying build/lib/unicore/tasks/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/tasks
+copying build/lib/unicore/tasks/unicore_task.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/tasks
+copying build/lib/unicore/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore
+copying build/lib/unicore/checkpoint_utils.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore
+copying build/lib/unicore/ema.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore
+copying build/lib/unicore/nan_detector.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore
+copying build/lib/unicore/options.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore
+copying build/lib/unicore/registry.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore
+copying build/lib/unicore/trainer.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore
+copying build/lib/unicore/utils.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore
+copying build/lib/unicore/version.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore
+creating /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore_cli
+copying build/lib/unicore_cli/__init__.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore_cli
+copying build/lib/unicore_cli/train.py -> /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore_cli
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/append_token_dataset.py to append_token_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/base_wrapper_dataset.py to base_wrapper_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/bert_tokenize_dataset.py to bert_tokenize_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/data_utils.py to data_utils.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/dictionary.py to dictionary.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/from_numpy_dataset.py to from_numpy_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/iterators.py to iterators.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/lmdb_dataset.py to lmdb_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/lru_cache_dataset.py to lru_cache_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/mask_tokens_dataset.py to mask_tokens_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/nested_dictionary_dataset.py to nested_dictionary_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/num_samples_dataset.py to num_samples_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/numel_dataset.py to numel_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/pad_dataset.py to pad_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/prepend_token_dataset.py to prepend_token_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/raw_dataset.py to raw_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/sort_dataset.py to sort_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/tokenize_dataset.py to tokenize_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/data/unicore_dataset.py to unicore_dataset.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/distributed/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/distributed/legacy_distributed_data_parallel.py to legacy_distributed_data_parallel.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/distributed/module_proxy_wrapper.py to module_proxy_wrapper.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/distributed/utils.py to utils.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/logging/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/logging/meters.py to meters.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/logging/metrics.py to metrics.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/logging/progress_bar.py to progress_bar.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/losses/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/losses/cross_entropy.py to cross_entropy.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/losses/masked_lm.py to masked_lm.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/losses/unicore_loss.py to unicore_loss.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/models/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/models/distributed_unicore_model.py to distributed_unicore_model.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/models/unicore_model.py to unicore_model.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules/layer_norm.py to layer_norm.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules/multihead_attention.py to multihead_attention.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules/rms_norm.py to rms_norm.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules/softmax_dropout.py to softmax_dropout.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules/transformer_decoder.py to transformer_decoder.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules/transformer_decoder_layer.py to transformer_decoder_layer.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules/transformer_encoder.py to transformer_encoder.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/modules/transformer_encoder_layer.py to transformer_encoder_layer.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/cosine_lr_scheduler.py to cosine_lr_scheduler.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/exponential_decay_schedule.py to exponential_decay_schedule.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/fixed_schedule.py to fixed_schedule.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/inverse_square_root_schedule.py to inverse_square_root_schedule.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/pass_through.py to pass_through.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/polynomial_decay_schedule.py to polynomial_decay_schedule.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/reduce_lr_on_plateau.py to reduce_lr_on_plateau.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/tri_stage_lr_scheduler.py to tri_stage_lr_scheduler.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/triangular_lr_scheduler.py to triangular_lr_scheduler.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/lr_scheduler/unicore_lr_scheduler.py to unicore_lr_scheduler.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/adadelta.py to adadelta.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/adagrad.py to adagrad.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/adam.py to adam.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/dynamic_loss_scaler.py to dynamic_loss_scaler.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/fp16_optimizer.py to fp16_optimizer.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/fused_adam.py to fused_adam.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/sgd.py to sgd.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/optim/unicore_optimizer.py to unicore_optimizer.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/tasks/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/tasks/unicore_task.py to unicore_task.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/checkpoint_utils.py to checkpoint_utils.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/ema.py to ema.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/nan_detector.py to nan_detector.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/options.py to options.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/registry.py to registry.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/trainer.py to trainer.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/utils.py to utils.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore/version.py to version.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore_cli/__init__.py to __init__.cpython-311.pyc
+byte-compiling /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore_cli/train.py to train.cpython-311.pyc
+running install_egg_info
+running egg_info
+writing unicore.egg-info/PKG-INFO
+writing dependency_links to unicore.egg-info/dependency_links.txt
+writing entry points to unicore.egg-info/entry_points.txt
+writing requirements to unicore.egg-info/requires.txt
+writing top-level names to unicore.egg-info/top_level.txt
+reading manifest file 'unicore.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+adding license file 'LICENSE'
+writing manifest file 'unicore.egg-info/SOURCES.txt'
+Copying unicore.egg-info to /home/fernando.amaral/BioSensIA/Uni-Core/.venv/lib/python3.11/site-packages/unicore-0.0.1-py3.11.egg-info
+running install_scripts
+Installing unicore-train script to /home/fernando.amaral/BioSensIA/Uni-Core/.venv/bin
+```

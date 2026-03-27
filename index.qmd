@@ -22,7 +22,7 @@ format:
     toc: true  
     toc-depth: 3
     number-sections: true
-    number-depth: 4
+    number-depth: 3
     theme: 
       - journal
       - _custom.scss
@@ -52,14 +52,14 @@ format:
 
 Segundo o [Guia de Uso do Spack](https://docs.google.com/document/d/1UX1CC6DMGsyAO0vzSoc_Up2SIDlh_Jzxw_w7fEEyx-A):
 
-1. Criar pastas para cache e armazenamento dos arquivos:
+1. Devemos criar pastas para cache e armazenamento dos arquivos:
 
    ```{bash}
    mkdir ~/spack
    mkdir ~/spack/source_cache
    ```
 
-1. Editar o arquivo de configuração `~/.spack/config.yaml` para conter as linhas (substituir `USUÁRIO` pelo nome de usuário):
+1. Devemos editar o arquivo de configuração `~/.spack/config.yaml` para conter as linhas (substituir `USUÁRIO` pelo nome de usuário):
 
    ```{bash}
    config:
@@ -75,7 +75,7 @@ O [README](https://github.com/fnaufel/DrugCLIP/blob/main/README.md) do repositó
 
 O [repositório do Uni-mol](https://github.com/deepmodeling/Uni-Mol/tree/main/unimol) lista como dependências:
 
-- [Uni-Core](https://github.com/dptech-corp/Uni-Core) (*framework* distribuído para PyTorch),
+- [Uni-Core](https://github.com/dptech-corp/Uni-Core) (*framework* distribuído para Pytorch),
 - Rdkit versão 2022.9.5.
 
 Aparentemente, o DrugCLIP traz sua própria cópia do Uni-mol. Não é necessário instalar o Uni-Mol separadamente.
@@ -138,54 +138,7 @@ Mon Mar 23 15:16:38 2026
 +-----------------------------------------------------------------------------------------+
 ```
 
-### Instalar o PyTorch
-
-Quais são os pacotes disponíveis relacionados ao Pytorch?
-
-```{bash}
-spack list | grep torch
-```
-
-```
-py-backpack-for-pytorch
-py-botorch
-py-clip-anytorch
-py-coca-pytorch
-py-curvlinops-for-pytorch
-py-efficientnet-pytorch
-py-ema-pytorch
-py-gpytorch
-py-laplace-torch
-py-open-clip-torch
-py-pytorch-gradual-warmup-lr
-py-pytorch-lightning
-py-pytorch-sphinx-theme
-py-pytorch-warmup
-py-rotary-embedding-torch
-py-segmentation-models-pytorch
-py-torch
-py-torch-cluster
-py-torch-fidelity
-py-torch-geometric
-py-torch-harmonics
-py-torch-nvidia-apex
-py-torch-scatter
-py-torch-sparse
-py-torch-spline-conv
-py-torchaudio
-py-torchbenchmark
-py-torchdata
-py-torchdiffeq
-py-torchfile
-py-torchgeo
-py-torchmeta
-py-torchmetrics
-py-torchseg
-py-torchsummary
-py-torchtext
-py-torchvision
-py-vector-quantize-pytorch
-```
+### Instalar o Pytorch
 
 Segundo `spack`, a versão preferida do Pytorch é a 2.5.1:
 
@@ -208,7 +161,7 @@ O `spack` vai compilar o fonte do Pytorch. Mas, para isto, precisamos instalar u
 spack install gcc@13.3.0
 ```
 
-Depois, precisamos carregar o pacote:
+Depois, precisamos carregar o pacote que acabamos de instalar:
 
 ```{bash}
 spack load gcc@13.3.0
@@ -347,4 +300,95 @@ Vamos compilar o Uni-core a partir do fonte.
 
 #### Compilar a partir do fonte
 
+Do [README do repositório do Uni-core](https://github.com/dptech-corp/Uni-Core/blob/main/README.md):
+
+> You can use `python setup.py install` or `pip install .` to build Uni-Core from source. The CUDA version in the build environment should be the same as the one in PyTorch.
+
+Vamos supor que já temos os seguintes pacotes no sistema (podemos conferir com `spack find`):
+
+- `python@3.11.9`
+- `py-torch@2.5.1`
+- `py-typing-extensions@4.12.2`
+- `py-sympy@1.13.0`
+
+Vamos supor, também, que já clonamos o repositório do Uni-core para `~/BioSensIA/Uni-Core`.
+
+
+##### Criar um ambiente virtual (Spack)
+
+```{bash}
+cd ~/BioSensIA/Uni-Core
+spack env create --dir .
+spack env activate .
+```
+
+
+##### Editar o arquivo `spack.yaml`
+
+O conteúdo do arquivo deve ser:
+
+```{yaml}
+spack:
+  specs:
+  - python@3.11.9
+  - py-pip
+  - py-torch@2.5.1
+  - py-typing-extensions@4.12.2
+  - py-sympy@1.13.0
+  view: ./view
+  concretizer:
+    unify: true
+```
+
+
+##### Concretizar e instalar
+
+```{bash}
+spack concretize -f
+spack install
+```
+
+
+##### Criar um ambiente virtual (venv)
+
+```{bash}
+./view/bin/python -m venv .venv
+source .venv/bin/activate
+
+python -m ensurepip --upgrade
+python -m pip install --upgrade pip setuptools wheel
+
+python - <<'PY'
+import pathlib, site
+venv_site = pathlib.Path(site.getsitepackages()[0])
+pth = venv_site / "spack_view_torch.pth"
+pth.write_text(str(pathlib.Path("view/lib/python3.11/site-packages").resolve()) + "\n")
+print(pth)
+PY
+```
+
+
+##### Verificar se o Pytorch está visível
+
+```{bash}
+python -c "import torch, sys; print(sys.executable); print(torch.__version__); print(torch.__file__)"
+```
+
+
+##### Instalar o Uni-core
+
+```{bash}
+python setup.py install
+```
+
+[Depois disto, o *script* `unicore-train` estará instalado em `~/BioSensIA/Uni-Core/.venv/bin`.]{.hl}
+
+
+### Testar instalação do Uni-core
+
 ???
+
+wikitext não estava disponível no url dado. Baixei de https://www.kaggle.com/datasets/bestwater/wikitext-2-v1?resource=download
+
+???
+
